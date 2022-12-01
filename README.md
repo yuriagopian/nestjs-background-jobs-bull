@@ -28,6 +28,14 @@
 
 ## Installation
 
+### Mailer Service
+
+https://nest-modules.github.io/mailer/docs/mailer.html
+
+### Fake SMTP
+
+https://ethereal.email/
+
 ```bash
 $ npm install
 ```
