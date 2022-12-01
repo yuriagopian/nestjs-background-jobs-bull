@@ -5,14 +5,14 @@ import { MailerModule } from '@nestjs-modules/mailer';
 @Module({
   imports: [BullModule.forRoot({
     redis: {
-      host: 'localhost',
-      port: 6379,
+      host: process.env.REDIS_HOST,
+      port: Number(process.env.REDIS_PORT),
     },
   }),
   MailerModule.forRoot({
     transport: {
-      host: 'smtp.ethereal.email',
-      port: 587,
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
       ignoreTLS: true,
       secure: false,
       auth: {
