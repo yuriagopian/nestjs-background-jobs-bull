@@ -51,7 +51,13 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+
 ```
+
+## See Bull Dashboard
+
+http://localhost:3000/queue-admin/queue/sendMail-queue
 
 ## References
 
