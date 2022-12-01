@@ -2,26 +2,28 @@ import { Module } from '@nestjs/common';
 import { CreateUserController } from './create-user/create-user.controller';
 import { BullModule } from '@nestjs/bull';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { ConfigModule } from "@nestjs/config"
+
 @Module({
-  imports: [BullModule.forRoot({
-    redis: {
-      host: process.env.REDIS_HOST,
-      port: Number(process.env.REDIS_PORT),
-    },
-  }),
-  MailerModule.forRoot({
-    transport: {
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      ignoreTLS: true,
-      secure: false,
-      auth: {
-        user: process.env.MAILDEV_INCOMING_USER,
-        pass: process.env.MAILDEV_INCOMING_PASS,
+
+  imports: [
+    ConfigModule.forRoot(),
+    BullModule.forRoot({
+      redis: {
+        host: 'localhost',
+        port: 6379,
       },
-    },
-    preview: true,
-  })],
+    }),
+    MailerModule.forRoot({
+      transport: {
+        host: process.env.SMTP_HOST,
+        port: Number(process.env.SMTP_PORT),
+        auth: {
+          user: process.env.MAILDEV_INCOMING_USER,
+          pass: process.env.MAILDEV_INCOMING_PASS,
+        },
+      },
+    })],
   controllers: [CreateUserController],
   providers: [],
 })
