@@ -53,6 +53,17 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## References
+
+https://www.learmoreseekmore.com/2021/04/guide-on-nestjs-queues.html
+
+## Comands redis
+
+```bash
+redis-server
+redis-cli
+```
+
 ## Test
 
 ```bash
@@ -65,6 +76,13 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Next Steps
+
+#### TODO
+
+- [ ] Implements Redis with Docker
+- [ ] Docker compose to start setup
 
 ## Support
 

@@ -3,6 +3,9 @@ import { CreateUserController } from './create-user/create-user.controller';
 import { BullModule } from '@nestjs/bull';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ConfigModule } from "@nestjs/config"
+import { SendMailProducerService } from './jobs/sendmail-producer-service';
+import { SendMailConsumerService } from './jobs/sendmail-consumer-service';
+import { join } from 'path';
 
 @Module({
 
@@ -14,6 +17,9 @@ import { ConfigModule } from "@nestjs/config"
         port: 6379,
       },
     }),
+    BullModule.registerQueue({
+      name: 'sendMail-queue'
+    }),
     MailerModule.forRoot({
       transport: {
         host: process.env.SMTP_HOST,
@@ -23,8 +29,9 @@ import { ConfigModule } from "@nestjs/config"
           pass: process.env.MAILDEV_INCOMING_PASS,
         },
       },
-    })],
+    }),
+  ],
   controllers: [CreateUserController],
-  providers: [],
+  providers: [SendMailConsumerService, SendMailProducerService],
 })
 export class AppModule { }
